@@ -38,35 +38,11 @@ void ble_evt_adv_report(ble_evt_t const* p_ble_evt) {
   // BB AA 4E E5 98 C0 (Address of BLE adv_name)
   //  0  1  2  3  4  5
 
-  if(ble_addr[0] == 0xBB && ble_addr[1] == 0xAA){ // If device has same device ID as ble_scan
-    printf("Received an advertisement!\n");
+  if(ble_addr[0] == 0x97 && ble_addr[1] == 0x03){ // If device has same device ID as ble_scan
 
-
-    printf("Device ID: %X%X\n",ble_addr[1],ble_addr[0]);
-    printf("Payload data length: %u\n", adv_len);
+    printf("%s\r", (&adv_buf[7]));
     
-    printf("Raw payload data:\n");
-
-    // print raw payload
-    for(uint16_t i = 0; i < adv_len; i++){
-      printf("%X ",adv_buf[i]);
-    }
-    
-    // Get data length and type (2, flags for adv_name simple BLE)
-    printf("\nData length: %u   Data type: %X <Flags>\n", adv_buf[0],adv_buf[1]);
-    printf("   Data value: %X <LE General Disc., BR/EDR Not Supported>\n",adv_buf[2]);
-
-    printf("Data length: %u   Data type: %X <Complete Local Name>\n", adv_buf[3],adv_buf[4]);
-    printf("   Data value: ");
-    // print payload data as chars
-    for(uint16_t i = 5; i < adv_len; i++){
-      printf("%c",adv_buf[i]);
-    }
-
-    printf("Data length: %u   Data type: %X <TX Power Level>\n", adv_buf[14], adv_buf[15]);
-    printf("   Data value: %u dBm\n", adv_buf[16]);
-
-    printf("\n\n");
+  //2 1 6 1B FF E0 2 F0 9F 8C 9A 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
   }
 }
 
